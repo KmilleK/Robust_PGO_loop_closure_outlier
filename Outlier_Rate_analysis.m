@@ -8,17 +8,11 @@
 
 % Matlab workspace and working folder initialisation
 clear           
-folderPath = 'C:\Users\camille\Documents\graduated_thesis\26_6'; 
+folderPath = 'C:\Users\camille\Documents\graduated_thesis\Robust_PGO_loop_closure_outlier'; 
 subfolders_full = genpath(folderPath); 
 
-excludedFolder = 'C:\Users\camille\Documents\graduated_thesis\26_6\cvx';  % Specify the folder to exclude
-excludedSubfolders = genpath(excludedFolder);  
-
-% Remove the excluded subfolders from the generated path
-subfolders = strrep(subfolders_full, [excludedSubfolders ';'], '');% Generate a string containing all subfolders recursively
-
 % Change to your actual folder
-addpath(subfolders);                                                       % Add the subfolders to the MATLAB path
+addpath(subfolders_full);                                                       % Add the subfolders to the MATLAB path
 
 % Constant definition
 
@@ -26,6 +20,9 @@ n= 100;                         % Number of node
 w_r=0.01;                       % Covariance of the rotation noise  
 w_t=0.1;                        % Covariance of the translation noise
 n_lc=20;                        % Number of additional loop closure in the dataset;
+
+% Choose if edge separation 
+edge_separation=true;
 
 % Data initialisation 
 
@@ -70,17 +67,17 @@ for ind_out=1:length(percent_outlier)
         for ind_MC_run=1:10
     
             % Measurement update with additional outliers 
-            Infected_measurements=Update_measurements(poses,measurements,percent_outlier(ind_out),n,n_lc,w_r,w_t);
+            Infected_measurements=Update_measurements(poses,measurements,percent_outlier(ind_out),n_lc);
 
             %%%%%%%%%%%%%%%%%%%%% Pose graph optimization process 
     
             % Rotation computation first step 
             
-            [poses_inter,rank,timeR]=RotationCVXProblem3D(Infected_measurements,robust_loss_function,n,w_r);
+            [poses_inter,rank,timeR]=RotationCVXProblem3D(Infected_measurements,edge_separation,robust_loss_function,n,w_r);
                     
             % Translation computation second step 
             
-            [FinalPoses,timeT]=TranslationCVXProblem3D(poses_inter,Infected_measurements,robust_loss_function,n,w_t);
+            [FinalPoses,timeT]=TranslationCVXProblem3D(poses_inter,Infected_measurements,edge_separation,robust_loss_function,n,w_t);
                   
             % Error computation 
             ARE_val=ARE(poses,FinalPoses);

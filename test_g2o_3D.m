@@ -3,18 +3,13 @@
 %%%%%%%%%%%%%%%%%%%%% INITIALISATION 
 
 % Matlab workspace and working folder initialisation
-clear           
-folderPath = 'D:\document\MATLAB\26_6'; 
+clear
+
+folderPath = 'C:\Users\camille\Documents\graduated_thesis\Robust_PGO_loop_closure_outlier'; 
 subfolders_full = genpath(folderPath); 
 
-excludedFolder = 'D:\document\MATLAB\26_6\cvx';  % Specify the folder to exclude
-excludedSubfolders = genpath(excludedFolder);  
-
-% Remove the excluded subfolders from the generated path
-subfolders = strrep(subfolders_full, [excludedSubfolders ';'], '');% Generate a string containing all subfolders recursively
-
 % Change to your actual folder
-addpath(subfolders);                                                       % Add the subfolders to the MATLAB path
+addpath(subfolders_full);                                                       % Add the subfolders to the MATLAB path
 
 % Constant definition
 
@@ -26,9 +21,12 @@ n_lc=20;                        % Number of additional loop closure in the datas
 robust_loss_function=KernelFunction.Identity;
 percent_outlier=0.00;
 
+% Choose if edge separation 
+edge_separation=true;
+
 %% Data initialisation from g2o
 
-Data_type=DataType.Sphere_g2o;        % Decide the type of data for the testing 
+Data_type=DataType.Smaller_parking;        % Decide the type of data for the testing 
 
 [poses,measurements,n]=Initialize_Pose_Data(Data_type);  
 
@@ -40,11 +38,11 @@ Infected_measurements=Update_measurements(poses,measurements,percent_outlier);
 disp('start optimization');
 % Rotation computation first step 
             
-[poses_inter,rank,timeR]=RotationCVXProblem3D(Infected_measurements,robust_loss_function,n,w_r);
+[poses_inter,rank,timeR]=RotationCVXProblem3D(Infected_measurements,edge_separation,robust_loss_function,n,w_r);
                     
 % Translation computation second step 
             
-[FinalPoses,timeT]=TranslationCVXProblem3D(poses_inter,Infected_measurements,robust_loss_function,n,w_t);
+[FinalPoses,timeT]=TranslationCVXProblem3D(poses_inter,Infected_measurements,edge_separation,robust_loss_function,n,w_t);
                   
 % Analysis the result 
 

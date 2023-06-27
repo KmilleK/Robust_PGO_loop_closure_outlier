@@ -22,7 +22,7 @@ function Infected_measurements = Update_measurements(varargin)
         measurements=varargin{2};                        
         p_out=varargin{3};                         
         n_lc=count_loop_closure(measurements);                       
-    elseif numArgs==5
+    elseif numArgs==4
         poses=varargin{1};
         measurements=varargin{2};                        
         p_out=varargin{3};                         
@@ -46,7 +46,7 @@ function Infected_measurements = Update_measurements(varargin)
     %Infected_measurements= Measurement.empty(length(measurements)+n_add,0);
     %Infected_measurements(1:length(measurements))=measurements;
     
-    Infected_measurements=[measurements,Measurement.empty(n_add)];
+    Infected_measurements=[measurements,Measurement.empty(n_add,0)];
     
     %Create the outliers measurements
     

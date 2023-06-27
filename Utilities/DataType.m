@@ -1,9 +1,9 @@
 classdef DataType
     enumeration
         Cube,
-        Sphere_g2o,
         Parking,
-        Smaller_parking
+        Smaller_parking,
+        Sphere_g2o
     end
     
     methods

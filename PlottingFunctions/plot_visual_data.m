@@ -70,8 +70,6 @@ function plot_noisy_measurement(measurements)
     position_index=1;
     % Plotting the translations between nodes
     for i = 1:length(measurements)
-        disp(i);
-        
         measurement = measurements(i);
         
         if strcmpi(strtrim(measurement.type), 'Odometry')
