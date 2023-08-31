@@ -50,11 +50,11 @@ function t=cvx_solver_separate(poses,measurements,robust_loss_type,n,d,w_t)
                  termint=poses(measurements(i).i).R'*(t(d*measurements(i).j-(d-1):d*measurements(i).j,:)-t(d*measurements(i).i-(d-1):d*measurements(i).i,:))-measurements(i).t;
                  switch  robust_loss_type
                     case KernelFunction.Identity
-                        objective=objective+w_t*sum_square(termint);
+                        objective=objective+w_t*norm(termint,2);
                     case KernelFunction.L1
                         objective=objective+w_t*norm(termint,1);
                     case KernelFunction.L2
-                        objective=objective+w_t*norm(termint,2);
+                        objective=objective+power(2,w_t*norm(termint,2));
                     case KernelFunction.Huber
                         objective=objective+huber_circ(termint,[],1/w_t);
                     otherwise
@@ -68,10 +68,7 @@ function t=cvx_solver_separate(poses,measurements,robust_loss_type,n,d,w_t)
         end
 
         minimize (objective);
-        subject to
-        for i=1:d
-            t(i)==0;
-        end
+        
     cvx_end
 
 

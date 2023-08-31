@@ -16,6 +16,9 @@
 	cvx_solver SDPT3
 	cvx_save_prefs
 
+- Add additional function (huber_fro) loss function into cvx function folder (\cvx\functions\@cvx)
+
+ 
 2) Change the folderPath and the excludeFolder in the main script to fit your actual file localisation.
 
 	folderPath = 'D:\document\MATLAB\24_6'; 
@@ -24,7 +27,4 @@
 	excludedFolder = 'D:\document\MATLAB\24_6\cvx';  % Specify the folder to exclude
 	excludedSubfolders = genpath(excludedFolder); 
 
-
-TO DO: 
-
-plot result more modality : title input if wanted, and add the first colum to the plot title 
+3) The main running file is: Outlier_Rate_analysis.m  

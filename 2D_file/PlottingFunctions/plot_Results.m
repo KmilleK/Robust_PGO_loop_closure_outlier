@@ -1,4 +1,4 @@
-function plot_Results_box(percent_outlier, Results)
+function plot_Results(percent_outlier, Results)
     % percent_outlier is the vector with the percentage of outlier
     % Results is a cell matrix which contains the results of all the
     % computation on the form 

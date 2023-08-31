@@ -8,7 +8,7 @@ classdef Measurement3D
     end
 
     methods 
-        function obj = Measurement(type, i, j, R, t)
+        function obj = Measurement3D(type, i, j, R, t)
             if nargin > 0
                 obj.type = type;
                 obj.i = i;

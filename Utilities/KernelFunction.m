@@ -1,6 +1,6 @@
 classdef KernelFunction
     enumeration
-        Identity,
+        I,
         L1,
         L2,
         Huber
@@ -14,12 +14,12 @@ classdef KernelFunction
         function [color,name] = info_plot(obj)
             name=char(obj);
             switch name
-                case 'Identity'
-                    color='black-';
+                case 'I'
+                    color='red-';
                 case 'L1'
                     color='blue-';
                 case 'L2'
-                    color='red-';
+                    color='black-';
                 case 'Huber'
                     color='green-';
             end 

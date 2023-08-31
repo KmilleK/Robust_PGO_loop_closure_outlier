@@ -1,4 +1,4 @@
-classdef Pose3 
+classdef Pose3D 
     properties
         i 
         R            % rotation matrix 3*3 
@@ -6,18 +6,10 @@ classdef Pose3
     end
 
     methods 
-        function obj=Pose3(i,R,t)
-            disp(nargin)
-            if nargin ==3
+        function obj=Pose3D(i,R,t)
                 obj.i=i;
                 obj.R=R;
                 obj.t=t;
-            elseif nargin==2
-                obj.i=i;
-                obj.R=R;
-                obj.t=[0;0;0];
-            end
-
         end
        
         % function displayRotationMatrix(obj)

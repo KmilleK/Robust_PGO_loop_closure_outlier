@@ -1,5 +1,5 @@
 function [poses,measurements] = CreateData(Data_type,n,w_r,w_t,p_out)
-% CreateData creates the random graph data for a run of the Monte Carlo
+% CreateData creates the graph data for a run of the Monte Carlo
 %
 % poses : array of Pose3D data 
 % measurements : array of Measurement3D data 
