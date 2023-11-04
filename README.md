@@ -36,16 +36,9 @@ This project is the code associated with a graduated thesis, for the pose graph 
 
 ### Built with
 
-Matlab and its toolbox. The optimization solver used is cvx. 
+Matlab and its toolbox (if the toolbox are not installed on your computer, when running you will be prompted to install it). The optimization solver used is cvx. 
 
 ## Getting started
-
-### Prerequisites
-
-You need a Matlab license and to install the toolbox: 
-- Pynput: pip install pynput
-- PIL: pip install Pillow
-- Threading: pip install threading
 
 ### Installation
 
@@ -56,13 +49,13 @@ You need a Matlab license and to install the toolbox:
 - Change directories to the top of the CVX distribution, and run the cvx_setup command. 
 	cd C:\personal\cvx
 	cvx_setup
-- Change the solver: the free one are SDPT3 and SeDuMi. You can get a academic MOSEK license online if you want 
+- Change the solver: the free ones are SDPT3 and SeDuMi. You can get an academic MOSEK license online if you want 
 	cvx_solver SDPT3
 	cvx_save_prefs
 - Add additional function (huber_fro) loss function into cvx function folder (\cvx\functions\@cvx)
 
  
-2) Change the folderPath and the excludeFolder in the main script to fit your actual file localisation.
+2) Change the folderPath and the exclude folder in the main script to fit your actual file localization.
 
 	folderPath = 'D:\document\MATLAB\24_6'; 
 	subfolders_full = genpath(folderPath); 
@@ -72,4 +65,4 @@ You need a Matlab license and to install the toolbox:
 
 ## Usage 
 
-You can just run the Outlier_Rate_analysis.m file to see the different quality. 
+You can just run the Outlier_Rate_analysis.m file to compare the impact of the outlier rate on the different datasets. 
